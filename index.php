@@ -13,7 +13,6 @@ Author URI: https://yugsnoyl.com
 */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
-
 // process the post data for saving in the admin
 function save_custom_field( $post_id ) {
   
