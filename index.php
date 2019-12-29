@@ -49,13 +49,13 @@ function priceRangeHtml() {
 
   if ( !empty( $price_range ) ) {
 
-    wp_enqueue_script( 'testing', './test.js' );
-
-    echo "<p>Pay what you want</p>";
+    echo "<p>Sliding scale</p>";
     echo '
     <div>
+      <span>Min: ' . $price_range . '</span>
       <input type="range" id="price-range-input" name="price-range-input" 
      	 min="' . $price_range . '" max="' . $product->price . '" value="' . $product->price . '" step="1">
+      <span>Max: ' . $product->price . '
       <label id="price-range-label" for="price-range-input">
       </label>
     </div>
@@ -80,7 +80,7 @@ function priceRangeHiddenField() {
 
     priceRangeInput.addEventListener("input", function(event) {
       var currencySymbol = "'.html_entity_decode(get_woocommerce_currency_symbol()).'";
-      priceLabel.innerText = currencySymbol + this.value;
+      priceLabel.innerText = currencySymbol + this.value + ".00"; // TODO: make dynamic
       priceRangeHidden.value = this.value;
     });
 
@@ -100,8 +100,6 @@ function test($cart_item_data) {
 
 }
 add_action( 'woocommerce_add_cart_item_data', 'test', 10, 3 );
-
-// $cart_item_data = (array) apply_filters( 'woocommerce_add_cart_item_data', $cart_item_data, $product_id, $variation_id, $quantity );
 
 function before_calculate_totals( $cart_obj ) {
   if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
