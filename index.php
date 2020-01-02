@@ -94,8 +94,6 @@ function test($cart_item_data) {
     $cart_item_data["price"] = $_POST["price-range"];
   }
 
-  var_dump( $cart_item_data );
-
   return $cart_item_data;
 
 }
