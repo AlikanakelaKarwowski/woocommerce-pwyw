@@ -92,6 +92,14 @@ add_action( 'woocommerce_before_add_to_cart_button', 'priceRangeHiddenField' );
 function test($cart_item_data) {
   if ( !empty( $_POST["price-range"] ) ) {
     $cart_item_data["price"] = $_POST["price-range"];
+
+    function alter_price($price) {
+      $price = '';
+      $cart_item_data["price"] = $_POST["price-range"];
+      $price = woocommerce_price($cart_item_data["price"]);
+      return $price;
+    }
+    add_filter( 'woocommerce_get_price_html', 'alter_price', 100, 2 );
   }
 
   return $cart_item_data;
