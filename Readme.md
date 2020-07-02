@@ -1,0 +1,1 @@
+Plugin for wordpress to let users choose how much they would like to pay for a product on woo commerce.
